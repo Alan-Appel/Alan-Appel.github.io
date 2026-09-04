@@ -5,10 +5,10 @@ import { FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import { projects } from "@/lib/projects";
 
 /**
- * Cuando hay `image`, es una captura real de la app corriendo (con datos
- * de prueba, ya que ninguna está deployada) — no un mockup. Sin imagen
- * todavía, cae al placeholder de marca (número + inicial) en vez de una
- * imagen genérica o inventada.
+ * Cuando hay `image`, es una captura real (local con datos de prueba para
+ * los proyectos que no están deployados, o del sitio en vivo para los que
+ * sí) — no un mockup. Sin imagen todavía, cae al placeholder de marca
+ * (número + inicial) en vez de una imagen genérica o inventada.
  */
 function ProjectVisual({
   index,

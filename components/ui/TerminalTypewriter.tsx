@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 export type TypewriterLine = {
@@ -27,9 +27,14 @@ const TICK_MS = 20;
 export default function TerminalTypewriter({
   lines,
   durationMs = 6000,
+  showLineNumbers = false,
 }: {
   lines: TypewriterLine[];
   durationMs?: number;
+  /** Gutter de números de línea (uno por elemento de `lines`), como un
+   * editor de código real — MissionTerminal lo usa para que la ventana de
+   * "Sobre mí" se sienta como un editor de verdad y no un mockup plano. */
+  showLineNumbers?: boolean;
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -75,21 +80,40 @@ export default function TerminalTypewriter({
         ))}
       </div>
 
-      <div aria-hidden="true">
+      <div
+        aria-hidden="true"
+        className={showLineNumbers ? "grid grid-cols-[2ch_1fr] gap-x-4" : undefined}
+      >
         {flat.map((line, i) => {
           const visibleCount = Math.max(0, Math.min(line.text.length, revealed - line.start));
           const isTypingThisLine = revealed > line.start && revealed < line.end;
+          const hasStartedThisLine = revealed > line.start;
+          // El número de línea tiene que subir/bajar junto con el mismo
+          // margen-top que ya trae la línea real (mt-3/mt-4/mt-6), si no,
+          // los números quedan pegados arriba y desalineados del texto.
+          const marginMatch = line.className?.match(/\bmt-\S+/);
           return (
-            <p key={i} className={line.className}>
-              {line.text.slice(0, visibleCount)}
-              {isTypingThisLine && (
-                <span className="ml-0.5 inline-block h-[1em] w-[2px] -translate-y-[1px] bg-current align-middle" />
+            <Fragment key={i}>
+              {showLineNumbers && (
+                <span
+                  className={`select-none text-right text-white/20 transition-opacity duration-300 ${hasStartedThisLine ? "opacity-100" : "opacity-0"} ${marginMatch?.[0] ?? ""}`}
+                >
+                  {i + 1}
+                </span>
               )}
-            </p>
+              <p className={line.className}>
+                {line.text.slice(0, visibleCount)}
+                {isTypingThisLine && (
+                  <span className="ml-0.5 inline-block h-[1em] w-[2px] -translate-y-[1px] bg-current align-middle" />
+                )}
+              </p>
+            </Fragment>
           );
         })}
         {isDone && (
-          <span className="mt-1 inline-block h-4 w-2 bg-vector-blue align-middle animate-pulse motion-reduce:animate-none" />
+          <span
+            className={`mt-1 inline-block h-4 w-2 bg-vector-blue align-middle animate-pulse motion-reduce:animate-none ${showLineNumbers ? "col-start-2" : ""}`}
+          />
         )}
       </div>
     </>

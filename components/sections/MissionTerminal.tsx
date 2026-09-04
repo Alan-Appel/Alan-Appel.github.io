@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { FiFileText } from "react-icons/fi";
 import { identity, mission } from "@/lib/about";
 import TerminalTypewriter from "@/components/ui/TerminalTypewriter";
 
@@ -49,28 +50,46 @@ export default function MissionTerminal() {
           La misión detrás de Vector
         </motion.h1>
 
-        {/* Terminal window — formato terminal adaptado a la identidad de Vector:
-            monocromo (negro/blanco/azul), sin colores de "traffic light". */}
+        {/* Ventana de editor — formato adaptado a la identidad de Vector:
+            monocromo (negro/blanco/azul), sin colores de "traffic light".
+            Gutter de líneas, tab de archivo y barra de estado real (como
+            un editor de código de verdad, no un mockup plano) + sombra con
+            profundidad para que se sienta tangible, flotando sobre la página. */}
         <motion.div
           initial="hidden"
           animate="show"
           custom={0.2}
           variants={fadeUp}
-          className="mt-10 overflow-hidden rounded-2xl border border-black/10 bg-vector-black shadow-sm"
+          className="mt-10 overflow-hidden rounded-2xl border border-black/10 bg-vector-black shadow-2xl shadow-black/20 ring-1 ring-black/5"
         >
-          <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-            <span className="ml-3 font-mono text-xs text-white/30">
+          {/* Barra de título — gradiente sutil para dar volumen, como la
+              barra de una ventana real en vez de un rectángulo plano. */}
+          <div className="flex items-center gap-2 border-b border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent px-5 py-3.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-b from-white/25 to-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-b from-white/25 to-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-b from-white/25 to-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]" />
+            {/* Tab de archivo activo, como en un editor real */}
+            <span className="ml-4 flex items-center gap-1.5 rounded-t-md border-b-2 border-vector-blue px-2 py-1 font-mono text-xs text-white/70">
+              <FiFileText aria-hidden="true" className="h-3 w-3" />
               mision.md
             </span>
           </div>
           <div className="p-6 font-mono text-[13px] leading-relaxed sm:p-8 sm:text-sm">
             {/* 14s para ~1300 caracteres: rápido y prolijo (tipeo de a 2
                 caracteres por tick), pero se puede seguir leyendo — el
-                default de 6s quedaba casi instantáneo con este texto. */}
-            <TerminalTypewriter lines={terminalLines} durationMs={14000} />
+                default de 6s quedaba casi instantáneo con este texto.
+                showLineNumbers: gutter de líneas como un editor real. */}
+            <TerminalTypewriter
+              lines={terminalLines}
+              durationMs={14000}
+              showLineNumbers
+            />
+          </div>
+          {/* Barra de estado — detalle final que remata la sensación de
+              "editor real" (UTF-8, tipo de archivo, etc, como VS Code). */}
+          <div className="flex items-center justify-between border-t border-white/10 bg-white/[0.03] px-5 py-2 font-mono text-[10px] uppercase tracking-wider text-white/25">
+            <span>Markdown</span>
+            <span>UTF-8</span>
           </div>
         </motion.div>
       </div>

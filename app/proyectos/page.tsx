@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Proyectos",
   description:
-    "Proyectos reales de desarrollo Full Stack de Alan Appel (Vector): sistema de gestión inmobiliaria y plataforma de gestión de eventos y congresos.",
+    "Proyectos reales de desarrollo Full Stack de Alan Appel (Vector): sistema de gestión inmobiliaria, plataforma de gestión de eventos y congresos, y el sitio corporativo de Wicomm.",
   alternates: { canonical: "/proyectos" },
 };
 
@@ -28,6 +28,7 @@ function ProjectsJsonLd() {
         url: siteConfig.url,
       },
       ...(project.codeUrl && { codeRepository: project.codeUrl }),
+      ...(project.liveUrl && { url: project.liveUrl }),
       keywords: project.stack.join(", "),
     })),
   };

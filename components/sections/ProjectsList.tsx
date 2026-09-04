@@ -44,9 +44,9 @@ export default function ProjectsList() {
           variants={fadeUp}
           className="mt-6 max-w-xl text-base leading-relaxed text-black/60 sm:text-lg"
         >
-          Proyectos reales, de código abierto. Ninguno está deployado todavía
-          — las capturas son de cada app corriendo con datos de prueba. Si
-          alguno se parece a lo que necesitás,{" "}
+          Proyectos reales. Algunos son de código abierto y corren
+          localmente con datos de prueba (así están las capturas); otros ya
+          están en producción. Si alguno se parece a lo que necesitás,{" "}
           <Link
             href="/contacto"
             className="font-medium text-vector-black underline decoration-vector-blue/40 underline-offset-4 transition-colors hover:decoration-vector-blue"
@@ -71,8 +71,8 @@ export default function ProjectsList() {
                 href={`/proyectos/${project.slug}`}
                 className="block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
               >
-                <div className="relative aspect-video overflow-hidden bg-vector-black">
-                  {project.image && (
+                <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-vector-black">
+                  {project.image ? (
                     <Image
                       src={project.image}
                       alt={`Captura de pantalla de ${project.name}`}
@@ -80,6 +80,12 @@ export default function ProjectsList() {
                       sizes="(min-width: 640px) 50vw, 100vw"
                       className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                     />
+                  ) : (
+                    // Todavía sin captura — placeholder de marca en vez de
+                    // una imagen genérica o inventada.
+                    <span className="text-[6rem] font-bold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.15)] sm:text-[7rem]">
+                      {project.name.charAt(0)}
+                    </span>
                   )}
                 </div>
                 <div className="p-6 sm:p-7">

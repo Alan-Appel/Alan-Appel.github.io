@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiArrowUpRight } from "react-icons/fi";
 import { SiGithub } from "react-icons/si";
 import type { Project } from "@/lib/projects";
 
@@ -75,23 +75,38 @@ export default function ProjectDetail({ project }: { project: Project }) {
           ))}
         </motion.ul>
 
-        {project.codeUrl && (
-          <motion.a
-            initial="hidden"
-            animate="show"
-            custom={0.3}
-            variants={fadeUp}
-            href={project.codeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-vector-black px-6 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
-          >
-            <SiGithub aria-hidden="true" className="h-4 w-4" />
-            Ver código en GitHub
-          </motion.a>
-        )}
+        <motion.div
+          initial="hidden"
+          animate="show"
+          custom={0.3}
+          variants={fadeUp}
+          className="mt-8 flex flex-wrap items-center gap-4"
+        >
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-vector-blue px-6 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-vector-blue-dark hover:shadow-lg hover:shadow-vector-blue/25 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+            >
+              Ver sitio
+              <FiArrowUpRight aria-hidden="true" className="h-4 w-4" />
+            </a>
+          )}
+          {project.codeUrl && (
+            <a
+              href={project.codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-vector-black px-6 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+            >
+              <SiGithub aria-hidden="true" className="h-4 w-4" />
+              Ver código en GitHub
+            </a>
+          )}
+        </motion.div>
 
-        {project.image && (
+        {project.image ? (
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -121,20 +136,35 @@ export default function ProjectDetail({ project }: { project: Project }) {
               </div>
             )}
           </motion.div>
+        ) : (
+          <motion.div
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+            custom={0}
+            variants={fadeUp}
+            className="mt-16 flex aspect-video items-center justify-center rounded-2xl border border-dashed border-black/15 bg-black/[0.02] text-sm text-black/40"
+          >
+            Capturas del sitio, próximamente
+          </motion.div>
         )}
 
-        <motion.p
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          custom={0.1}
-          variants={fadeUp}
-          className="mt-6 text-xs text-black/40"
-        >
-          Ninguno de mis proyectos está deployado todavía — estas son
-          capturas reales de la aplicación corriendo localmente, con datos de
-          prueba.
-        </motion.p>
+        {/* Solo aclaro "no deployado" para los proyectos que efectivamente
+            no lo están — no tiene sentido mostrarlo en uno que sí está en
+            producción (project.liveUrl). */}
+        {!project.liveUrl && (
+          <motion.p
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-40px" }}
+            custom={0.1}
+            variants={fadeUp}
+            className="mt-6 text-xs text-black/40"
+          >
+            Este proyecto todavía no está deployado — la captura es de la
+            aplicación real corriendo localmente, con datos de prueba.
+          </motion.p>
+        )}
       </div>
     </section>
   );

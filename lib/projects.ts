@@ -7,13 +7,14 @@ export type Project = {
   name: string;
   description: string;
   stack: string[];
-  /** Ninguno de los dos está deployado — sin link de demo todavía. */
+  /** Inmobiliaria y Eventify no están deployados (sin link de demo). Wicomm
+   * sí — es un sitio real en producción, con liveUrl. */
   liveUrl?: string;
   codeUrl?: string;
   /**
-   * Captura de la app real corriendo localmente (levantada con datos de
-   * prueba para poder renderizarla, ya que ninguna está deployada). No es
-   * un mockup ni una imagen genérica — es la UI real del proyecto.
+   * Captura real de la app/sitio (local con datos de prueba para los que no
+   * están deployados, o del sitio en vivo para los que sí). No es un
+   * mockup ni una imagen genérica — es la UI real del proyecto.
    */
   image?: string;
   /** Segunda captura real (vista responsive/mobile) para la página de detalle. */
@@ -41,5 +42,17 @@ export const projects: Project[] = [
       "https://github.com/Alan-Appel/Sistema-de-Gestion-de-Eventos-y-Congresos---Eventify",
     image: "/projects/eventify.jpg",
     mobileImage: "/projects/eventify-mobile.jpg",
+  },
+  {
+    slug: "wicomm",
+    name: "Wicomm — Soporte Técnico Profesional",
+    description:
+      "Sitio web corporativo desarrollado para presentar los servicios de soporte técnico y soluciones tecnológicas de Wicomm, facilitando la conexión entre la empresa y sus clientes.",
+    stack: ["PHP", "HTML", "CSS", "JavaScript"],
+    // Proyecto terminado y lanzado — a diferencia de los otros dos, no hay
+    // repositorio (Alan no tiene el código), pero sí está en producción.
+    liveUrl: "https://www.wicomm.com.py/",
+    // TODO: agregar capturas reales (desktop + mobile) cuando Alan las mande
+    // — el sandbox no puede llegar a wicomm.com.py directo para capturarlas.
   },
 ];
