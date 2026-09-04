@@ -44,7 +44,7 @@ export default function ClosingBanner({
           </div>
           <Link
             href="/contacto"
-            className="shrink-0 rounded-full bg-vector-blue px-7 py-3 text-sm font-medium text-vector-white transition-colors hover:bg-vector-blue-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="shrink-0 rounded-full bg-vector-blue px-7 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-vector-blue-dark hover:shadow-lg hover:shadow-vector-blue/25 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             Contactarme
           </Link>

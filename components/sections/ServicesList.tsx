@@ -82,7 +82,7 @@ export default function ServicesList() {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i * 0.08}
                 variants={fadeUp}
-                className="rounded-2xl border border-black/10 bg-white p-7 sm:p-8"
+                className="rounded-2xl border border-black/10 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl hover:shadow-black/5 sm:p-8"
               >
                 {Icon && (
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-black/[0.04] text-vector-blue">

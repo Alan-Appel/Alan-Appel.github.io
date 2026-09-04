@@ -47,7 +47,7 @@ export default function ValuesGrid() {
                 viewport={{ once: true, margin: "-60px" }}
                 custom={i * 0.08}
                 variants={fadeUp}
-                className="rounded-2xl border border-black/10 bg-white p-6"
+                className="rounded-2xl border border-black/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl hover:shadow-black/5"
               >
                 {Icon && (
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-black/[0.04] text-vector-blue">

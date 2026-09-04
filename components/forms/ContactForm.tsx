@@ -178,7 +178,7 @@ export default function ContactForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="rounded-full bg-vector-blue px-7 py-3 text-sm font-medium text-vector-white transition-colors hover:bg-vector-blue-dark focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue disabled:opacity-60"
+          className="rounded-full bg-vector-blue px-7 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-vector-blue-dark hover:shadow-lg hover:shadow-vector-blue/25 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue disabled:pointer-events-none disabled:translate-y-0 disabled:opacity-60 disabled:shadow-none"
         >
           {status === "submitting" ? "Enviando..." : "Enviar mensaje"}
         </button>

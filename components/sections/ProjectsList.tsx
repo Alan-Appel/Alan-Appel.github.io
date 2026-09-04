@@ -65,7 +65,7 @@ export default function ProjectsList() {
               viewport={{ once: true, margin: "-60px" }}
               custom={i * 0.1}
               variants={fadeUp}
-              className="group overflow-hidden rounded-2xl border border-black/10"
+              className="group overflow-hidden rounded-2xl border border-black/10 transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl hover:shadow-black/5"
             >
               <Link
                 href={`/proyectos/${project.slug}`}

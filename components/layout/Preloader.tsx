@@ -5,10 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 
 /**
- * Preloader de marca — en vez de reutilizar el isotipo como imagen estática,
- * dibuja un vector matemático (línea + punta de flecha) trazándose a sí
- * mismo: literalmente "dirección, magnitud y sentido" (Brand Book 2.2),
- * el concepto que le da nombre a la marca.
+ * Preloader de marca — dibuja el ictus (el pez cristiano, símbolo real de la
+ * marca) trazándose a sí mismo con el mismo lenguaje de "vector" del Brand
+ * Book: dirección, magnitud y sentido. El cuerpo del pez se traza primero
+ * (dos curvas), y la cola sale al final, todo en negro (sin azul) — mismo
+ * timing y misma idea que el vector matemático que dibujaba antes, solo que
+ * ahora es el pez el que se dibuja en vez de una flecha.
  *
  * Se reproduce una sola vez por carga completa (vive en el layout raíz, que
  * no se vuelve a montar en la navegación interna de Next.js) y se omite por
@@ -61,34 +63,54 @@ export default function Preloader() {
           aria-hidden="true"
         >
           <svg
-            width="140"
+            width="150"
             height="80"
-            viewBox="0 0 140 80"
+            viewBox="0 0 150 80"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <motion.line
-              x1="10"
-              y1="70"
-              x2="118"
-              y2="14"
+            {/* Cuerpo del pez — dos curvas que nacen en el hocico y se
+                encuentran a la derecha, como el ictus tradicional. */}
+            <motion.path
+              d="M14 40 C 46 14, 80 14, 104 40"
               stroke="#000000"
               strokeWidth="3"
               strokeLinecap="round"
+              fill="none"
               initial={{ pathLength: 0 }}
               animate={{ pathLength: 1 }}
-              transition={{ duration: 0.9, ease: "easeInOut" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
             />
             <motion.path
-              d="M100 8 L124 10 L116 32"
-              stroke="#2563eb"
+              d="M14 40 C 46 66, 80 66, 104 40"
+              stroke="#000000"
               strokeWidth="3"
               strokeLinecap="round"
-              strokeLinejoin="round"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeInOut" }}
+            />
+            {/* Cola — remate en negro, mismo rol que la punta de flecha original. */}
+            <motion.path
+              d="M104 40 L130 20"
+              stroke="#000000"
+              strokeWidth="3"
+              strokeLinecap="round"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 0.35, delay: 0.75, ease: "easeInOut" }}
+              transition={{ duration: 0.3, delay: 0.7, ease: "easeInOut" }}
+            />
+            <motion.path
+              d="M104 40 L130 60"
+              stroke="#000000"
+              strokeWidth="3"
+              strokeLinecap="round"
+              fill="none"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.78, ease: "easeInOut" }}
             />
           </svg>
 

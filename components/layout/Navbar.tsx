@@ -23,16 +23,16 @@ export default function Navbar() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+          className="flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
           onClick={() => setOpen(false)}
         >
           <Image
             src="/brand/vector-icon-black.png"
             alt=""
-            width={152}
-            height={47}
+            width={150}
+            height={44}
             priority
-            className="h-5 w-auto"
+            className="h-4 w-auto"
           />
           {/* Texto real (no raster) — nítido a cualquier tamaño */}
           <span className="text-lg font-bold tracking-wide text-vector-black">
@@ -74,7 +74,7 @@ export default function Navbar() {
 
         <Link
           href="/contacto"
-          className="hidden rounded-full bg-vector-black px-5 py-2 text-sm font-medium text-vector-white transition-colors hover:bg-vector-blue md:inline-block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+          className="hidden rounded-full bg-vector-black px-5 py-2 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-vector-blue hover:shadow-md hover:shadow-vector-blue/25 md:inline-block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
         >
           Trabajemos juntos
         </Link>

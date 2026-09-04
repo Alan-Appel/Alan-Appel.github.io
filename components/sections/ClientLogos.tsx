@@ -8,8 +8,8 @@ function LogoTile({ name, logo, href, shape = "rect" }: (typeof clients)[number]
     <div
       className={
         isCircle
-          ? "group flex h-24 w-24 mx-auto items-center justify-center rounded-full border border-black/5 bg-white p-2 transition-colors hover:border-black/10"
-          : "group flex h-24 w-full items-center justify-center rounded-xl border border-black/5 bg-white px-6 py-4 transition-colors hover:border-black/10"
+          ? "group relative flex h-24 w-24 mx-auto items-center justify-center overflow-hidden rounded-full border border-black/5 bg-white p-2 shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:border-black/20 hover:shadow-md"
+          : "group relative flex h-24 w-full items-center justify-center overflow-hidden rounded-xl border border-black/5 bg-white px-6 py-4 shadow-none transition-all duration-300 hover:-translate-y-0.5 hover:border-black/20 hover:shadow-md"
       }
     >
       <Image
@@ -19,10 +19,12 @@ function LogoTile({ name, logo, href, shape = "rect" }: (typeof clients)[number]
         height={120}
         className={
           isCircle
-            ? "h-full w-full rounded-full object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
-            : "max-h-14 w-auto object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+            ? "h-full w-full rounded-full object-contain transition-transform duration-300 group-hover:scale-105"
+            : "max-h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
         }
       />
+      {/* Overlay al hover — oscurece levemente para destacar el tile sin tocar el color real del logo */}
+      <span className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/[0.06]" />
     </div>
   );
 

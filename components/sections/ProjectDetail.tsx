@@ -84,7 +84,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             href={project.codeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-vector-black px-6 py-3 text-sm font-medium text-vector-white transition-colors hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-vector-black px-6 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-black/80 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
           >
             <SiGithub aria-hidden="true" className="h-4 w-4" />
             Ver código en GitHub

@@ -53,7 +53,7 @@ function ProjectCard({
   index: number;
 }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-black/10">
+    <article className="group overflow-hidden rounded-2xl border border-black/10 transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl hover:shadow-black/5">
       <ProjectVisual index={index} name={project.name} image={project.image} />
       <div className="p-6 sm:p-7">
         <h3 className="text-xl font-bold tracking-tight text-vector-black">

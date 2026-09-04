@@ -14,13 +14,13 @@ export default function Footer() {
     <footer className="mt-auto bg-vector-black text-vector-white">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-14 md:flex-row md:items-start md:justify-between">
         <div className="max-w-sm">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1">
             <Image
               src="/brand/vector-icon-white.png"
               alt=""
-              width={125}
-              height={41}
-              className="h-5 w-auto"
+              width={122}
+              height={38}
+              className="h-4 w-auto"
             />
             <span className="text-lg font-bold tracking-wide text-vector-white">
               VECTOR
@@ -89,7 +89,8 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-6xl px-6 py-5 text-xs text-white/40">
-          © {year} {siteConfig.name}. Todos los derechos reservados.
+          © {year} {siteConfig.name} — Alan Roy Appel Monges. Todos los
+          derechos reservados.
         </div>
       </div>
     </footer>

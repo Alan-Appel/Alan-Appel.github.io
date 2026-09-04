@@ -14,7 +14,11 @@ export const siteConfig = {
   availableForWork: true, // confirmado por Alan
 };
 
-/** Stack real declarado en el Brand Book (Fase 4.2 — Skills). No agregar tecnologías sin confirmar. */
+/**
+ * Stack real declarado en el Brand Book (Fase 4.2 — Skills), más las
+ * herramientas de datos/IA que Alan confirmó agregar (SQL, Power BI, Google
+ * Sheets, Python, PHP, ChatGPT). No agregar tecnologías sin confirmar.
+ */
 export const techStack = [
   "React",
   "JavaScript",
@@ -25,6 +29,12 @@ export const techStack = [
   "Git",
   "Figma",
   "GitHub",
+  "Python",
+  "PHP",
+  "SQL",
+  "Power BI",
+  "Google Sheets",
+  "ChatGPT",
 ];
 
 export type NavLink = {

@@ -7,6 +7,13 @@ import Lenis from "lenis";
  * Scroll suave (Fase 3 — rendimiento: solo transform/opacity, sin listeners
  * manuales de scroll). Se desactiva por completo si el usuario prefiere
  * movimiento reducido — en ese caso el navegador usa scroll nativo normal.
+ *
+ * Usa interpolación continua (`lerp`) en vez de una animación por-duración:
+ * con `duration`, cada nuevo evento de rueda mientras la animación anterior
+ * todavía está en curso reinicia el tween, y en Windows (donde el mouse
+ * entrega muchos eventos de rueda pequeños en vez de pocos grandes) eso se
+ * siente como que el scroll "se traba" a mitad de camino. `lerp` reacciona
+ * a cada evento de forma continua sin ese conflicto.
  */
 export default function SmoothScrollProvider({
   children,
@@ -20,8 +27,9 @@ export default function SmoothScrollProvider({
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t: number) => 1 - Math.pow(1 - t, 3),
+      lerp: 0.1,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
     });
 
     let rafId: number;
@@ -31,8 +39,14 @@ export default function SmoothScrollProvider({
     }
     rafId = requestAnimationFrame(raf);
 
+    function handleResize() {
+      lenis.resize();
+    }
+    window.addEventListener("resize", handleResize);
+
     return () => {
       cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", handleResize);
       lenis.destroy();
     };
   }, []);

@@ -83,13 +83,13 @@ export default function Hero() {
         >
           <Link
             href="/proyectos"
-            className="rounded-full bg-vector-black px-7 py-3 text-sm font-medium text-vector-white transition-colors hover:bg-vector-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+            className="rounded-full bg-vector-black px-7 py-3 text-sm font-medium text-vector-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-vector-blue hover:shadow-lg hover:shadow-vector-blue/25 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
           >
             Ver proyectos
           </Link>
           <Link
             href="/contacto"
-            className="rounded-full border border-black/15 px-7 py-3 text-sm font-medium text-vector-black transition-colors hover:border-vector-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+            className="rounded-full border border-black/15 px-7 py-3 text-sm font-medium text-vector-black transition-all duration-300 hover:-translate-y-0.5 hover:border-vector-black hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
           >
             Contactarme
           </Link>
