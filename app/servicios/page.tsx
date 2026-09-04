@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Servicios",
   description:
     "Desarrollo web Full Stack, e-commerce, software a medida y automatización con IA — servicios de desarrollo para empresas y organizaciones en Paraguay. Escribime y conversamos sobre tu proyecto.",
+  alternates: { canonical: "/servicios" },
 };
 
 /**

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Sobre mí",
   description:
     "Conocé la misión y los valores que guían el trabajo de Vector: excelencia, integridad y servicio en cada proyecto de desarrollo.",
+  alternates: { canonical: "/sobre-mi" },
 };
 
 export default function SobreMi() {

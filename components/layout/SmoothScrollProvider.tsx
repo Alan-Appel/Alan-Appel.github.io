@@ -14,6 +14,16 @@ import Lenis from "lenis";
  * entrega muchos eventos de rueda pequeños en vez de pocos grandes) eso se
  * siente como que el scroll "se traba" a mitad de camino. `lerp` reacciona
  * a cada evento de forma continua sin ese conflicto.
+ *
+ * Este provider vive una sola vez en el layout raíz y NO se remonta al
+ * navegar entre páginas (Next.js solo cambia el contenido). Cada página
+ * tiene una altura distinta, y sin avisarle a Lenis, sus límites de scroll
+ * quedan calculados para la página anterior — navegando lo suficiente esa
+ * diferencia se acumula hasta que el scroll parece "trabarse" en un punto
+ * fijo (solo un refresh completo lo reinicia). El ResizeObserver de acá
+ * abajo mide el alto real del body en todo momento y le avisa a Lenis cada
+ * vez que cambia — por navegación, por imágenes que terminan de cargar, o
+ * por cualquier otra razón — así sus límites nunca quedan desactualizados.
  */
 export default function SmoothScrollProvider({
   children,
@@ -44,9 +54,13 @@ export default function SmoothScrollProvider({
     }
     window.addEventListener("resize", handleResize);
 
+    const resizeObserver = new ResizeObserver(() => lenis.resize());
+    resizeObserver.observe(document.body);
+
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       lenis.destroy();
     };
   }, []);

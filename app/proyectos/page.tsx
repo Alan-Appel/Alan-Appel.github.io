@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Proyectos",
   description:
     "Proyectos reales de desarrollo Full Stack de Alan Appel (Vector): sistema de gestión inmobiliaria y plataforma de gestión de eventos y congresos.",
+  alternates: { canonical: "/proyectos" },
 };
 
 /**

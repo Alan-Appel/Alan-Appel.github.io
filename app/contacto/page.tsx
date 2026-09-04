@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Contacto",
   description:
     "Contactá a Alan Appel (Vector) para conversar sobre tu proyecto de desarrollo web, e-commerce, software a medida o automatización con IA.",
+  // Fija a la URL limpia sin el ?servicio= — todas las variantes de
+  // deep-link (desde cada tarjeta de Servicios) son la misma página real,
+  // así Google no las trata como contenido duplicado.
+  alternates: { canonical: "/contacto" },
 };
 
 /**

@@ -67,7 +67,10 @@ export default function MissionTerminal() {
             </span>
           </div>
           <div className="p-6 font-mono text-[13px] leading-relaxed sm:p-8 sm:text-sm">
-            <TerminalTypewriter lines={terminalLines} />
+            {/* 14s para ~1300 caracteres: rápido y prolijo (tipeo de a 2
+                caracteres por tick), pero se puede seguir leyendo — el
+                default de 6s quedaba casi instantáneo con este texto. */}
+            <TerminalTypewriter lines={terminalLines} durationMs={14000} />
           </div>
         </motion.div>
       </div>
