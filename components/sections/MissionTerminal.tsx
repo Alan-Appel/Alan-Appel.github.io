@@ -75,13 +75,14 @@ export default function MissionTerminal() {
             </span>
           </div>
           <div className="p-6 font-mono text-[13px] leading-relaxed sm:p-8 sm:text-sm">
-            {/* 14s para ~1300 caracteres: rápido y prolijo (tipeo de a 2
-                caracteres por tick), pero se puede seguir leyendo — el
-                default de 6s quedaba casi instantáneo con este texto.
-                showLineNumbers: gutter de líneas como un editor real. */}
+            {/* Ritmo de tipeo FIJO (no duración total): 25 caracteres por
+                segundo, como alguien escribiendo rápido de verdad — ni al
+                instante (como quedaba con duration en un texto largo) ni
+                arrastrado. showLineNumbers: gutter de líneas como un editor
+                real. */}
             <TerminalTypewriter
               lines={terminalLines}
-              durationMs={14000}
+              charsPerSecond={25}
               showLineNumbers
             />
           </div>

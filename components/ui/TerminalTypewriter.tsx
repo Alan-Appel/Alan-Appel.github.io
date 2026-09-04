@@ -18,19 +18,25 @@ export type TypewriterLine = {
  * - Accesible: el texto completo vive también en un nodo sr-only estático,
  *   y la versión animada queda aria-hidden para no spamear lectores de
  *   pantalla caracter por caracter.
- * - Velocidad por duración total (no por caracter): así un bloque de texto
- *   más largo no hace que la animación se sienta eterna — siempre tarda
- *   `durationMs` en completarse, sea cual sea el largo del contenido.
+ * - Velocidad: por defecto `durationMs` (un bloque más largo no hace que la
+ *   animación se sienta eterna, siempre tarda lo mismo en completarse) — o,
+ *   si se pasa `charsPerSecond`, a un ritmo de tipeo FIJO y real (esa es la
+ *   que usa MissionTerminal: importa que se vea como alguien tipeando de
+ *   verdad, no que termine en un tiempo prolijo).
  */
 const TICK_MS = 20;
 
 export default function TerminalTypewriter({
   lines,
   durationMs = 6000,
+  charsPerSecond,
   showLineNumbers = false,
 }: {
   lines: TypewriterLine[];
   durationMs?: number;
+  /** Si se pasa, manda por sobre `durationMs`: ritmo de tipeo fijo (caracteres
+   * por segundo), como una persona escribiendo a velocidad constante. */
+  charsPerSecond?: number;
   /** Gutter de números de línea (uno por elemento de `lines`), como un
    * editor de código real — MissionTerminal lo usa para que la ventana de
    * "Sobre mí" se sienta como un editor de verdad y no un mockup plano. */
@@ -47,9 +53,14 @@ export default function TerminalTypewriter({
     [lines],
   );
   const totalLength = flat.length ? flat[flat.length - 1].end : 0;
-  const charsPerTick = Math.max(1, Math.ceil(totalLength / (durationMs / TICK_MS)));
+  // Caracteres por milisegundo — con charsPerSecond fijo, o derivado de
+  // durationMs (compat: contenido total / tiempo total).
+  const charsPerMs = charsPerSecond ? charsPerSecond / 1000 : totalLength / durationMs;
 
-  const [tickRevealed, setTickRevealed] = useState(0);
+  // Acumulador en punto flotante (no entero): a ritmos lentos (charsPerSecond
+  // bajo) avanza menos de un caracter por tick, y necesita varios ticks para
+  // sumar uno — con un entero quedaría siempre en 0 y nunca tipearía nada.
+  const [revealedFloat, setRevealedFloat] = useState(0);
 
   useEffect(() => {
     // El caso "movimiento reducido" se resuelve en el render (más abajo),
@@ -57,18 +68,18 @@ export default function TerminalTypewriter({
     if (prefersReducedMotion) return;
 
     const id = setInterval(() => {
-      setTickRevealed((r) => {
+      setRevealedFloat((r) => {
         if (r >= totalLength) {
           clearInterval(id);
           return r;
         }
-        return Math.min(totalLength, r + charsPerTick);
+        return Math.min(totalLength, r + charsPerMs * TICK_MS);
       });
     }, TICK_MS);
     return () => clearInterval(id);
-  }, [prefersReducedMotion, totalLength, charsPerTick]);
+  }, [prefersReducedMotion, totalLength, charsPerMs]);
 
-  const revealed = prefersReducedMotion ? totalLength : tickRevealed;
+  const revealed = prefersReducedMotion ? totalLength : Math.floor(revealedFloat);
   const isDone = revealed >= totalLength;
 
   return (

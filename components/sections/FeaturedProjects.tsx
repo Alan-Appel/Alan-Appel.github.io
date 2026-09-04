@@ -5,56 +5,31 @@ import { FiArrowUpRight, FiArrowRight } from "react-icons/fi";
 import { projects } from "@/lib/projects";
 
 /**
- * Cuando hay `image`, es una captura real (local con datos de prueba para
- * los proyectos que no están deployados, o del sitio en vivo para los que
- * sí) — no un mockup. Sin imagen todavía, cae al placeholder de marca
- * (número + inicial) en vez de una imagen genérica o inventada.
+ * "Destacados" solo incluye proyectos con `image` (ver filtro más abajo),
+ * así que acá siempre hay una captura real para mostrar — no un mockup.
  */
-function ProjectVisual({
-  index,
-  name,
-  image,
-}: {
-  index: number;
-  name: string;
-  image?: string;
-}) {
-  if (image) {
-    return (
-      <div className="relative aspect-video overflow-hidden bg-vector-black">
-        <Image
-          src={image}
-          alt={`Captura de pantalla de ${name}`}
-          fill
-          sizes="(min-width: 640px) 50vw, 100vw"
-          className="object-cover object-top"
-        />
-      </div>
-    );
-  }
-
+function ProjectVisual({ name, image }: { name: string; image: string }) {
   return (
-    <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-vector-black">
-      <span className="font-mono text-xs tracking-widest text-white/30">
-        {String(index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-      </span>
-      <span className="absolute text-[6rem] font-bold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(255,255,255,0.15)] sm:text-[8rem]">
-        {name.charAt(0)}
-      </span>
+    <div className="relative aspect-video overflow-hidden bg-vector-black">
+      <Image
+        src={image}
+        alt={`Captura de pantalla de ${name}`}
+        fill
+        sizes="(min-width: 640px) 50vw, 100vw"
+        className="object-cover object-top"
+      />
     </div>
   );
 }
 
 function ProjectCard({
   project,
-  index,
 }: {
-  project: (typeof projects)[number];
-  index: number;
+  project: (typeof projects)[number] & { image: string };
 }) {
   return (
     <article className="group overflow-hidden rounded-2xl border border-black/10 transition-all duration-300 hover:-translate-y-1 hover:border-black/20 hover:shadow-xl hover:shadow-black/5">
-      <ProjectVisual index={index} name={project.name} image={project.image} />
+      <ProjectVisual name={project.name} image={project.image} />
       <div className="p-6 sm:p-7">
         <h3 className="text-xl font-bold tracking-tight text-vector-black">
           {project.name}
@@ -108,6 +83,15 @@ function ProjectCard({
   );
 }
 
+// "Destacados" es una vitrina visual — un proyecto sin captura todavía
+// (como Wicomm, por ahora) cae acá a un placeholder gigante que no aporta
+// nada y arruina la sección. Mejor mostrar acá solo los que ya tienen una
+// captura real; el proyecto sigue existiendo igual en /proyectos completo.
+const featuredProjects = projects.filter(
+  (project): project is (typeof projects)[number] & { image: string } =>
+    Boolean(project.image),
+);
+
 export default function FeaturedProjects() {
   return (
     <section className="border-t border-black/10 bg-vector-white">
@@ -131,8 +115,8 @@ export default function FeaturedProjects() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.slug} project={project} index={i} />
+          {featuredProjects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </div>
