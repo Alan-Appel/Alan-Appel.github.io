@@ -1,26 +1,55 @@
 @import "tailwindcss";
 
+/* Tipografía autoalojada (sin dependencia de red en runtime/build) */
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+/* ---------------------------------------------------------------
+   Vector — Design tokens
+   Fuente: Documentación de marca, Fase 2 (Brand Book)
+   --------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-vector-black: #000000;
+  --color-vector-white: #ffffff;
+  --color-vector-blue: #2563eb;
+  --color-vector-blue-dark: #1d4ed8;
+
+  --background: var(--color-vector-white);
+  --foreground: var(--color-vector-black);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-vector-black: var(--color-vector-black);
+  --color-vector-white: var(--color-vector-white);
+  --color-vector-blue: var(--color-vector-blue);
+  --color-vector-blue-dark: var(--color-vector-blue-dark);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Respeta la preferencia de movimiento reducido del usuario
+   (Fase 3 — accesibilidad, animaciones con Framer Motion) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
