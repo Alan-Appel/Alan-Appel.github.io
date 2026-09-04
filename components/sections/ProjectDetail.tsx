@@ -106,7 +106,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
           )}
         </motion.div>
 
-        {project.image ? (
+        {project.image && (
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -135,17 +135,6 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 />
               </div>
             )}
-          </motion.div>
-        ) : (
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-            custom={0}
-            variants={fadeUp}
-            className="mt-16 flex aspect-video items-center justify-center rounded-2xl border border-dashed border-black/15 bg-black/[0.02] text-sm text-black/40"
-          >
-            Capturas del sitio, próximamente
           </motion.div>
         )}
 

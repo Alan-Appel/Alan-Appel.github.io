@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import type { IconType } from "react-icons";
-import { TbDatabase } from "react-icons/tb";
-import { FiBarChart2, FiMessageSquare } from "react-icons/fi";
+import { TbDatabase, TbBrandOpenai } from "react-icons/tb";
+import { FiBarChart2 } from "react-icons/fi";
 import {
   SiReact,
   SiJavascript,
@@ -23,14 +23,13 @@ import { techStack } from "@/lib/site-config";
 
 /**
  * Stack real (Brand Book 4.2, + herramientas de datos/IA confirmadas por
- * Alan) → ícono de marca oficial (react-icons/simple-icons) y su color real,
- * que solo aparece al hacer hover (por defecto todo es gris/monocromo).
- * Simple Icons no incluye un logo oficial de Power BI ni de OpenAI/ChatGPT
- * (no están en su catálogo), así que esos dos usan un ícono genérico
- * representativo en vez de un logo inventado — el color sí es el real de
- * cada marca. "SQL" tampoco es una marca específica (no se confirmó un
- * motor puntual como MySQL o PostgreSQL), así que también usa un ícono
- * genérico de base de datos.
+ * Alan) → ícono de marca oficial y su color real, que solo aparece al
+ * hacer hover (por defecto todo es gris/monocromo). ChatGPT usa el logo
+ * real de OpenAI (react-icons/tb — Simple Icons no lo tiene en catálogo).
+ * Power BI sí usa un ícono genérico representativo (ningún set de íconos
+ * consultado lo tiene) — el color sí es el real de la marca. "SQL" tampoco
+ * es una marca específica (no se confirmó un motor puntual como MySQL o
+ * PostgreSQL), así que también usa un ícono genérico de base de datos.
  */
 const ICONS: Record<string, IconType> = {
   React: SiReact,
@@ -47,7 +46,7 @@ const ICONS: Record<string, IconType> = {
   PHP: SiPhp,
   "Power BI": FiBarChart2,
   "Google Sheets": SiGooglesheets,
-  ChatGPT: FiMessageSquare,
+  ChatGPT: TbBrandOpenai,
 };
 
 /** Color de marca real de cada herramienta (hex oficial Simple Icons donde aplica). */
