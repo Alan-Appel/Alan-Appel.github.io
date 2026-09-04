@@ -83,6 +83,34 @@ export default function Footer() {
                 Instagram
               </a>
             </li>
+            <li>
+              <a
+                href={socialLinks.freecodecamp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/70 transition-colors hover:text-vector-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                freeCodeCamp
+              </a>
+            </li>
+            <li>
+              <a
+                href={socialLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-white/70 transition-colors hover:text-vector-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                WhatsApp
+              </a>
+            </li>
+            <li>
+              <a
+                href={socialLinks.email}
+                className="text-sm text-white/70 transition-colors hover:text-vector-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                Email
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

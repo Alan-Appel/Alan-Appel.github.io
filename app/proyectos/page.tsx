@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ProjectsList from "@/components/sections/ProjectsList";
 import ClosingBanner from "@/components/sections/ClosingBanner";
 import { projects } from "@/lib/projects";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, socialLinks } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Proyectos",
@@ -26,6 +26,12 @@ function ProjectsJsonLd() {
         "@type": "Person",
         name: "Alan Roy Appel Monges",
         url: siteConfig.url,
+        sameAs: [
+          socialLinks.github,
+          socialLinks.linkedin,
+          socialLinks.instagram,
+          socialLinks.freecodecamp,
+        ],
       },
       ...(project.codeUrl && { codeRepository: project.codeUrl }),
       ...(project.liveUrl && { url: project.liveUrl }),

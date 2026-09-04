@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { FiLinkedin, FiInstagram } from "react-icons/fi";
-import { SiGithub } from "react-icons/si";
+import { FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
+import { SiGithub, SiWhatsapp, SiFreecodecamp } from "react-icons/si";
 import ContactForm from "@/components/forms/ContactForm";
 import { socialLinks, siteConfig } from "@/lib/site-config";
 
@@ -88,6 +88,31 @@ export default function ContactSection({
               >
                 <FiInstagram aria-hidden="true" className="h-5 w-5 text-vector-blue" />
                 Instagram
+              </a>
+              <a
+                href={socialLinks.freecodecamp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 text-sm font-medium text-vector-black transition-colors hover:text-vector-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                <SiFreecodecamp aria-hidden="true" className="h-5 w-5 text-vector-blue" />
+                freeCodeCamp
+              </a>
+              <a
+                href={socialLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 text-sm font-medium text-vector-black transition-colors hover:text-vector-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                <SiWhatsapp aria-hidden="true" className="h-5 w-5 text-vector-blue" />
+                WhatsApp
+              </a>
+              <a
+                href={socialLinks.email}
+                className="inline-flex items-center gap-3 text-sm font-medium text-vector-black transition-colors hover:text-vector-blue focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              >
+                <FiMail aria-hidden="true" className="h-5 w-5 text-vector-blue" />
+                {socialLinks.emailDisplay}
               </a>
               <p className="mt-2 text-sm text-black/50">
                 {siteConfig.location}

@@ -50,16 +50,13 @@ export const navLinks: NavLink[] = [
   { label: "Contacto", href: "/contacto" },
 ];
 
-/**
- * Alan todavía no tiene un email profesional para publicar acá, así que
- * por ahora el sitio no muestra ningún email de contacto — el formulario
- * (Web3Forms) es el canal principal, más estas redes reales. Cuando tenga
- * un email real, agregarlo acá como `email: "mailto:..."` y volver a
- * mostrarlo en Footer/CTASection/ContactSection/ContactForm.
- * WhatsApp: consultado, decidió no incluirlo por ahora.
- */
+/** Redes y canales de contacto reales, confirmados por Alan. */
 export const socialLinks = {
   github: "https://github.com/Alan-Appel",
   linkedin: "https://www.linkedin.com/in/alanappel/",
   instagram: "https://www.instagram.com/alanappel_/",
+  freecodecamp: "https://www.freecodecamp.org/AlanAppel",
+  email: "mailto:vctr.devpy@gmail.com",
+  emailDisplay: "vctr.devpy@gmail.com",
+  whatsapp: "https://wa.me/595986132300",
 };

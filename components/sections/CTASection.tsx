@@ -1,8 +1,21 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
+import { SiGithub, SiWhatsapp, SiFreecodecamp } from "react-icons/si";
 import { siteConfig, socialLinks } from "@/lib/site-config";
 import ContactForm from "@/components/forms/ContactForm";
+
+/** Mismo set de canales que Footer/ContactSection — acá en versión ícono
+ * solo (compacto), para no competir con el formulario al lado. */
+const CHANNELS = [
+  { href: socialLinks.github, label: "GitHub", Icon: SiGithub },
+  { href: socialLinks.linkedin, label: "LinkedIn", Icon: FiLinkedin },
+  { href: socialLinks.instagram, label: "Instagram", Icon: FiInstagram },
+  { href: socialLinks.freecodecamp, label: "freeCodeCamp", Icon: SiFreecodecamp },
+  { href: socialLinks.whatsapp, label: "WhatsApp", Icon: SiWhatsapp },
+  { href: socialLinks.email, label: "Email", Icon: FiMail },
+];
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -66,19 +79,28 @@ export default function CTASection() {
               Contame qué necesitás y armamos el camino desde cero.
             </motion.p>
 
-            <motion.a
+            <motion.div
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-80px" }}
               custom={0.34}
               variants={fadeUp}
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block font-mono text-sm text-white/50 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white hover:decoration-white/50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+              className="mt-8 flex flex-wrap items-center gap-4"
             >
-              o escribime directo por LinkedIn
-            </motion.a>
+              {CHANNELS.map(({ href, label, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  aria-label={label}
+                  title={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/50 transition-colors hover:border-white/30 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-vector-blue"
+                >
+                  <Icon aria-hidden="true" className="h-4 w-4" />
+                </a>
+              ))}
+            </motion.div>
           </div>
 
           <motion.div

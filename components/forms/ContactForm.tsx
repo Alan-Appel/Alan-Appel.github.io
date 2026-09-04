@@ -186,14 +186,12 @@ export default function ContactForm({
         {status === "error" && (
           <p className={isDark ? "text-sm text-white/60" : "text-sm text-black/60"}>
             Hubo un problema al enviar. Probá de nuevo en un momento o escribime
-            directo por{" "}
+            directo a{" "}
             <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={socialLinks.email}
               className="underline decoration-current/40 underline-offset-4 hover:decoration-current"
             >
-              LinkedIn
+              {socialLinks.emailDisplay}
             </a>
             .
           </p>

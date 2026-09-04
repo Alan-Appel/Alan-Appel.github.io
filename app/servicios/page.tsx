@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ServicesList from "@/components/sections/ServicesList";
 import ClosingBanner from "@/components/sections/ClosingBanner";
 import { services } from "@/lib/services";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, socialLinks } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Servicios",
@@ -28,6 +28,12 @@ function ServicesJsonLd() {
         "@type": "Person",
         name: "Alan Roy Appel Monges",
         url: siteConfig.url,
+        sameAs: [
+          socialLinks.github,
+          socialLinks.linkedin,
+          socialLinks.instagram,
+          socialLinks.freecodecamp,
+        ],
       },
     })),
   };
