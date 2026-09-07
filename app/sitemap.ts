@@ -2,6 +2,10 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { projects } from "@/lib/projects";
 
+// Requerido por output: "export" — el sitemap se arma entero en build time
+// a partir de lib/projects.ts, no depende de nada en tiempo de request.
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: siteConfig.url, changeFrequency: "monthly", priority: 1 },

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ContactSection from "@/components/sections/ContactSection";
-import { services } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -13,20 +13,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * searchParams es una Promise en esta versión de Next.js (confirmado en
- * node_modules/next/dist/docs). Se usa acá, en el Server Component, y no
- * con useSearchParams() dentro de ContactForm — así el costo de "dynamic
- * rendering" queda acotado a /contacto y no afecta el prerender estático
- * de Home ni de las demás páginas que reusan el mismo formulario.
+ * ContactSection lee el ?servicio= client-side (useSearchParams), así que
+ * esta página queda 100% estática — necesario para exportar el sitio como
+ * HTML estático (GitHub Pages no corre un server de Next.js). Suspense es
+ * obligatorio alrededor de useSearchParams en una página estática.
  */
-export default async function Contacto({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const { servicio } = await searchParams;
-  const slug = Array.isArray(servicio) ? servicio[0] : servicio;
-  const defaultService = services.find((s) => s.slug === slug)?.name ?? "";
-
-  return <ContactSection defaultService={defaultService} />;
+export default function Contacto() {
+  return (
+    <Suspense fallback={null}>
+      <ContactSection />
+    </Suspense>
+  );
 }

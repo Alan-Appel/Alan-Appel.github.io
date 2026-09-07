@@ -1,10 +1,12 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { motion, type Variants } from "framer-motion";
 import { FiLinkedin, FiInstagram, FiMail } from "react-icons/fi";
 import { SiGithub, SiWhatsapp, SiFreecodecamp } from "react-icons/si";
 import ContactForm from "@/components/forms/ContactForm";
 import { socialLinks, siteConfig } from "@/lib/site-config";
+import { services } from "@/lib/services";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -15,11 +17,19 @@ const fadeUp: Variants = {
   }),
 };
 
-export default function ContactSection({
-  defaultService = "",
-}: {
-  defaultService?: string;
-}) {
+/**
+ * El deep-link ?servicio= (desde las tarjetas de Servicios) se lee acá,
+ * client-side con useSearchParams — antes se leía en el Server Component
+ * de la página (app/contacto/page.tsx), pero eso vuelve dinámica a esa
+ * ruta y un export estático (GitHub Pages) necesita que todas las páginas
+ * sean estáticas. Leerlo acá no cambia nada para quien visita la página:
+ * el valor se aplica apenas carga el JS, antes de que se note.
+ */
+export default function ContactSection() {
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("servicio");
+  const defaultService = services.find((s) => s.slug === slug)?.name ?? "";
+
   return (
     <section className="bg-vector-white">
       <div className="mx-auto max-w-6xl px-6 pb-20 pt-20 sm:pb-28 sm:pt-28">
