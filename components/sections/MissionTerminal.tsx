@@ -32,7 +32,7 @@ export default function MissionTerminal() {
   return (
     <section className="bg-vector-white">
       <div className="mx-auto max-w-6xl px-6 pb-16 pt-20 sm:pb-20 sm:pt-28">
-        <div className="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
+        <div className="grid items-center gap-10 sm:grid-cols-[1fr_300px] sm:gap-12 lg:grid-cols-[1fr_340px] lg:gap-16">
           <div>
             <motion.p
               initial="hidden"
@@ -48,33 +48,51 @@ export default function MissionTerminal() {
               animate="show"
               custom={0.08}
               variants={fadeUp}
-              className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-vector-black sm:text-5xl"
+              className="mt-3 text-4xl font-bold tracking-tight text-vector-black sm:text-5xl"
             >
               La misión detrás de Vector
             </motion.h1>
+            <motion.p
+              initial="hidden"
+              animate="show"
+              custom={0.16}
+              variants={fadeUp}
+              className="mt-5 max-w-xl text-base leading-relaxed text-black/60 sm:text-lg"
+            >
+              Alan Appel, desarrollador Full Stack detrás de Vector.
+            </motion.p>
           </div>
 
-          {/* Foto real de Alan — en blanco y negro, así que encaja sola con
-              la paleta monocromo del sitio sin edición extra. Formato
-              compacto (tarjeta chica, no una foto de portada) para que
-              acompañe el encabezado sin competir con él. */}
+          {/* Foto real de Alan — en blanco y negro, encaja directo con la
+              paleta monocromo del sitio. Tratamiento de retrato editorial
+              (tamaño real, no una miniatura de esquina) con una línea de
+              acento azul y una etiqueta debajo, como una foto de autor en
+              una publicación — así se integra como parte del diseño y no
+              como una foto pegada aparte. */}
           <motion.div
             initial="hidden"
             animate="show"
             custom={0.14}
             variants={fadeUp}
-            className="mx-auto w-36 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-lg shadow-black/10 sm:mx-0 sm:w-44 lg:w-52"
+            className="mx-auto w-full max-w-[240px] sm:mx-0 sm:max-w-none"
           >
-            <div className="relative aspect-[4/5]">
-              <Image
-                src="/profile/alan-appel.jpg"
-                alt="Alan Appel, desarrollador Full Stack detrás de Vector"
-                fill
-                sizes="(min-width: 1024px) 208px, (min-width: 640px) 176px, 144px"
-                className="object-cover"
-                priority
-              />
+            <div className="relative overflow-hidden rounded-2xl border border-black/10 shadow-xl shadow-black/10">
+              <span className="absolute inset-x-0 top-0 z-10 h-1 bg-vector-blue" />
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/profile/alan-appel.jpg"
+                  alt="Alan Appel, desarrollador Full Stack detrás de Vector"
+                  fill
+                  sizes="(min-width: 1024px) 340px, (min-width: 640px) 300px, 240px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
+            <p className="mt-3 flex items-center justify-between font-mono text-[11px] uppercase tracking-widest text-black/35">
+              <span>Alan Appel</span>
+              <span>Asunción, PY</span>
+            </p>
           </motion.div>
         </div>
 
