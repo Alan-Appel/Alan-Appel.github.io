@@ -43,6 +43,10 @@ export default function ContactForm({
     const form = e.currentTarget;
     const data = new FormData(form);
     data.append("access_key", WEB3FORMS_ACCESS_KEY);
+    // Asunto con el nombre de quien escribe — así el mensaje se identifica
+    // solo en la bandeja de entrada, no queda como un genérico más.
+    const senderName = String(data.get("name") ?? "").trim();
+    data.set("subject", `Nuevo contacto de ${senderName} — Vector portfolio`);
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -96,7 +100,9 @@ export default function ContactForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="w-full max-w-xl">
+    // Sin noValidate: dejamos que el navegador valide nombre/email/mensaje
+    // antes de enviar — así no llega un mensaje vacío o incompleto.
+    <form onSubmit={handleSubmit} className="w-full max-w-xl">
       {/* Honeypot anti-spam — invisible para personas, Web3Forms lo descarta si viene lleno */}
       <input
         type="checkbox"
@@ -118,6 +124,7 @@ export default function ContactForm({
             name="name"
             type="text"
             required
+            minLength={2}
             autoComplete="name"
             placeholder="Tu nombre"
             className={fieldClass}
@@ -149,11 +156,16 @@ export default function ContactForm({
           defaultValue={defaultService || ""}
           className={`${fieldClass} appearance-none`}
         >
-          <option value="" disabled>
+          {/* El popup nativo del <select> lo pinta el sistema operativo,
+              casi siempre con fondo claro — si el texto de <option> hereda
+              el blanco del select (variant="dark"), queda blanco sobre
+              blanco e invisible. Forzamos texto oscuro en las opciones para
+              que se vean sí o sí, sin importar el tema del campo. */}
+          <option value="" disabled className="text-black/40">
             Elegí una opción
           </option>
           {SERVICE_OPTIONS.map((service) => (
-            <option key={service} value={service}>
+            <option key={service} value={service} className="text-vector-black">
               {service}
             </option>
           ))}
@@ -168,6 +180,7 @@ export default function ContactForm({
           id={`${formId}-message`}
           name="message"
           required
+          minLength={10}
           rows={4}
           placeholder="Contame sobre tu proyecto..."
           className={`${fieldClass} resize-none`}

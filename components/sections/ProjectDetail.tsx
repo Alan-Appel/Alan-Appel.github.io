@@ -113,7 +113,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             viewport={{ once: true, margin: "-60px" }}
             custom={0}
             variants={fadeUp}
-            className="mt-16 grid gap-6 sm:grid-cols-[1fr_280px]"
+            className={`mt-16 grid gap-6 ${project.mobileImage ? "sm:grid-cols-[1fr_280px]" : ""}`}
           >
             <div className="relative aspect-video overflow-hidden rounded-2xl border border-black/10 bg-vector-black">
               <Image

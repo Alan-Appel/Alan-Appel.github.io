@@ -52,7 +52,9 @@ export const projects: Project[] = [
     // Proyecto terminado y lanzado — a diferencia de los otros dos, no hay
     // repositorio (Alan no tiene el código), pero sí está en producción.
     liveUrl: "https://www.wicomm.com.py/",
-    // TODO: agregar capturas reales (desktop + mobile) cuando Alan las mande
-    // — el sandbox no puede llegar a wicomm.com.py directo para capturarlas.
+    image: "/projects/wicomm.jpg",
+    // Sin mobileImage todavía — Alan mandó la captura de escritorio; si en
+    // algún momento manda una de mobile, se agrega acá igual que en los
+    // otros dos proyectos.
   },
 ];

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import { FiFileText } from "react-icons/fi";
 import { identity, mission } from "@/lib/about";
@@ -31,24 +32,51 @@ export default function MissionTerminal() {
   return (
     <section className="bg-vector-white">
       <div className="mx-auto max-w-6xl px-6 pb-16 pt-20 sm:pb-20 sm:pt-28">
-        <motion.p
-          initial="hidden"
-          animate="show"
-          custom={0}
-          variants={fadeUp}
-          className="font-mono text-xs uppercase tracking-widest text-vector-blue"
-        >
-          Sobre mí
-        </motion.p>
-        <motion.h1
-          initial="hidden"
-          animate="show"
-          custom={0.08}
-          variants={fadeUp}
-          className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-vector-black sm:text-5xl"
-        >
-          La misión detrás de Vector
-        </motion.h1>
+        <div className="flex flex-col-reverse items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <motion.p
+              initial="hidden"
+              animate="show"
+              custom={0}
+              variants={fadeUp}
+              className="font-mono text-xs uppercase tracking-widest text-vector-blue"
+            >
+              Sobre mí
+            </motion.p>
+            <motion.h1
+              initial="hidden"
+              animate="show"
+              custom={0.08}
+              variants={fadeUp}
+              className="mt-3 max-w-2xl text-4xl font-bold tracking-tight text-vector-black sm:text-5xl"
+            >
+              La misión detrás de Vector
+            </motion.h1>
+          </div>
+
+          {/* Foto real de Alan — en blanco y negro, así que encaja sola con
+              la paleta monocromo del sitio sin edición extra. Formato
+              compacto (tarjeta chica, no una foto de portada) para que
+              acompañe el encabezado sin competir con él. */}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            custom={0.14}
+            variants={fadeUp}
+            className="mx-auto w-36 shrink-0 overflow-hidden rounded-2xl border border-black/10 shadow-lg shadow-black/10 sm:mx-0 sm:w-44 lg:w-52"
+          >
+            <div className="relative aspect-[4/5]">
+              <Image
+                src="/profile/alan-appel.jpg"
+                alt="Alan Appel, desarrollador Full Stack detrás de Vector"
+                fill
+                sizes="(min-width: 1024px) 208px, (min-width: 640px) 176px, 144px"
+                className="object-cover"
+                priority
+              />
+            </div>
+          </motion.div>
+        </div>
 
         {/* Ventana de editor — formato adaptado a la identidad de Vector:
             monocromo (negro/blanco/azul), sin colores de "traffic light".
