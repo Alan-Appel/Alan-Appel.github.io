@@ -48,14 +48,21 @@ export default function MissionTerminal() {
             {/* Foto — llena la columna a sangre (sin marco propio) y se
                 funde con el negro del panel: degradé a la derecha en
                 desktop (donde queda al lado del texto), degradé abajo en
-                mobile (donde queda arriba del texto). */}
-            <div className="relative h-72 sm:h-auto sm:min-h-[380px]">
+                mobile (donde queda arriba del texto).
+                En mobile el contenedor usa aspect-[4/5], casi el mismo
+                ratio que la foto original — así object-cover casi no
+                recorta nada (antes, con una altura fija baja tipo h-72
+                sobre un ancho de pantalla completo, el recorte era
+                agresivo: quedaba una franja súper zoomeada de la cara,
+                mal encuadrada). En desktop, donde la columna es angosta
+                y alta, sí conviene una altura mínima fija. */}
+            <div className="relative aspect-[4/5] sm:aspect-auto sm:h-auto sm:min-h-[380px]">
               <Image
                 src="/profile/alan-appel.jpg"
                 alt="Alan Appel, desarrollador Full Stack detrás de Vector"
                 fill
                 sizes="(min-width: 640px) 360px, 100vw"
-                className="object-cover object-[50%_22%]"
+                className="object-cover object-[38%_18%] sm:object-[38%_22%]"
                 priority
               />
               <div
