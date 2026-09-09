@@ -35,9 +35,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-vector-white text-vector-black">
-
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          src="https://www.googletagmanager.com/gtag/js?id=G-Q5DL47FMSE"
           strategy="afterInteractive"
         />
 
@@ -46,10 +45,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', 'G-Q5DL47FMSE');
           `}
         </Script>
 
+        {/* reducedMotion="user": toda animación de Framer Motion respeta
+            prefers-reduced-motion automáticamente en toda la app. */}
         <MotionConfig reducedMotion="user">
           <Preloader />
           <SmoothScrollProvider>
