@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { MotionConfig } from "framer-motion";
 import { siteConfig } from "@/lib/site-config";
 import Navbar from "@/components/layout/Navbar";
@@ -34,8 +35,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className="h-full antialiased">
       <body className="flex min-h-full flex-col bg-vector-white text-vector-black">
-        {/* reducedMotion="user": toda animación de Framer Motion respeta
-            prefers-reduced-motion automáticamente en toda la app. */}
+
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
+
         <MotionConfig reducedMotion="user">
           <Preloader />
           <SmoothScrollProvider>
